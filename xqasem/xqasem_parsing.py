@@ -5,6 +5,7 @@ import spacy
 import pandas as pd
 from spacy.tokens import Doc
 from .argument_detection import XQasemArgumentParser
+from .presets import DEFAULT_MODELS, DEFAULT_SPACY_MODELS
 from tqdm import tqdm
 
 
@@ -98,6 +99,29 @@ class XQasemParser:
 
         arg_parser = parser_cls.from_pretrained(arg_parser_path, language=nlp.lang, is_adapter=is_adapter, **parser_kwargs)
         return cls(arg_parser, nlp, verbose=verbose)
+
+    @classmethod
+    def from_language(cls, language: str, **kwargs):
+        """Load one of the released language presets.
+
+        Parameters
+        ----------
+        language
+            One of ``"fr"``, ``"ru"``, or ``"he"``.
+        **kwargs
+            Additional arguments forwarded to :meth:`from_pretrained`.
+        """
+        language = language.lower()
+        if language not in DEFAULT_MODELS:
+            supported = ", ".join(sorted(DEFAULT_MODELS))
+            raise ValueError(f"Unsupported language '{language}'. Supported languages: {supported}.")
+
+        kwargs.setdefault("is_adapter", True)
+        return cls.from_pretrained(
+            DEFAULT_MODELS[language],
+            spacy_lang=DEFAULT_SPACY_MODELS[language],
+            **kwargs,
+        )
 
     def __init__(self, arg_parser: XQasemArgumentParser, spacy_lang: spacy.Language, verbose: bool = False):
         """Create a parser from an argument parser and a spaCy language pipeline."""

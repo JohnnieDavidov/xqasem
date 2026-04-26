@@ -1,4 +1,5 @@
 from xqasem.argument_detection import XQasemArgumentParser
+from xqasem.presets import DEFAULT_MODELS, DEFAULT_SPACY_MODELS
 
 
 def make_parser(language: str = "fr") -> XQasemArgumentParser:
@@ -33,3 +34,8 @@ def test_parse_hebrew_pipe_separated_output() -> None:
         {"question": "מי הסביר?", "answer": "המפתחים"},
         {"question": "מה גרם?", "answer": "העדכון"},
     ]
+
+
+def test_language_presets_are_available() -> None:
+    assert set(DEFAULT_MODELS) == {"fr", "ru", "he"}
+    assert set(DEFAULT_SPACY_MODELS) == {"fr", "ru", "he"}

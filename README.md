@@ -8,8 +8,10 @@ This package accompanies the paper [Effective QA-Driven Annotation of Predicate-
 
 ## Installation
 
+After the package is published to PyPI:
+
 ```bash
-pip install -e .
+pip install xqasem
 ```
 
 Install the spaCy pipelines you plan to use:
@@ -21,20 +23,26 @@ python -m spacy download ru_core_news_sm
 
 Hebrew uses `spacy-stanza`; on first use, Stanza may need to download its Hebrew resources.
 
+### Installation from source
+
+```bash
+git clone https://github.com/JohnnieDavidov/xqasem.git
+cd xqasem
+pip install -e .
+```
+
 ## Basic Usage
 
 ```python
 from xqasem import XQasemParser
 
-parser = XQasemParser.from_pretrained(
-    "YonatanDavidov/qasem-fr-claire-lora",
-    spacy_lang="fr_core_news_md",
-    is_adapter=True,
-)
+parser = XQasemParser.from_language("fr")
 
-df = parser([
+sentences = [
     "Les développeurs ont expliqué pourquoi la mise à jour avait provoqué des pannes inattendues du service."
-])
+]
+
+df = parser(sentences)
 
 print(df)
 ```
@@ -43,6 +51,24 @@ The returned value is a `pandas.DataFrame` with these columns:
 
 ```text
 sentence, predicate, predicate_type, question, answer
+```
+
+The built-in language presets are:
+
+```python
+parser_fr = XQasemParser.from_language("fr")
+parser_ru = XQasemParser.from_language("ru")
+parser_he = XQasemParser.from_language("he")
+```
+
+You can also load an explicit Hugging Face model:
+
+```python
+parser = XQasemParser.from_pretrained(
+    "YonatanDavidov/qasem-fr-claire-lora",
+    spacy_lang="fr_core_news_md",
+    is_adapter=True,
+)
 ```
 
 ## Command Line
@@ -92,6 +118,23 @@ pytest
 ```
 
 Large model files, checkpoints, generated outputs, and local experiment directories are intentionally ignored by `.gitignore`.
+
+## Publishing to PyPI
+
+The public package name is `xqasem`. After updating the version in
+`pyproject.toml` and `xqasem/__init__.py`, build and publish with:
+
+```bash
+python -m pip install --upgrade build twine
+python -m build
+python -m twine upload dist/*
+```
+
+After the first PyPI release, users can install the package with:
+
+```bash
+pip install xqasem
+```
 
 ## Citation
 

@@ -10,7 +10,20 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
 authors = [
-  { name = "XQASem contributors" }
+  { name = "Jonathan Davidov" }
+]
+keywords = ["qasem", "qa-srl", "semantic-role-labeling", "nlp", "multilingual"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Text Processing :: Linguistic",
 ]
 dependencies = [
   "torch",
@@ -27,11 +40,18 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
+  "build",
   "pytest",
+  "twine",
 ]
 
 [project.scripts]
 xqasem-parse = "xqasem.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/JohnnieDavidov/xqasem"
+Repository = "https://github.com/JohnnieDavidov/xqasem"
+Paper = "https://aclanthology.org/2026.eacl-long.112/"
 
 [tool.setuptools.packages.find]
 include = ["xqasem*"]
