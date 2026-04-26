@@ -39,7 +39,7 @@ from xqasem import XQasemParser
 parser = XQasemParser.from_language("fr")
 
 sentences = [
-    "Les développeurs ont expliqué pourquoi la mise à jour avait provoqué des pannes inattendues du service."
+    "Les experts ont souligné que le nouvel algorithme accélère considérablement le traitement des requêtes complexes."
 ]
 
 df = parser(sentences)
@@ -51,10 +51,9 @@ Example output:
 
 | sentence | predicate | predicate_type | question | answer |
 | --- | --- | --- | --- | --- |
-| Les développeurs ont expliqué pourquoi la mise à jour avait provoqué des pannes inattendues du service. | expliqué | verb | Qui a expliqué quelque chose ? | Les développeurs |
-| Les développeurs ont expliqué pourquoi la mise à jour avait provoqué des pannes inattendues du service. | expliqué | verb | Qu'est-ce que les développeurs ont expliqué ? | pourquoi la mise à jour avait provoqué des pannes inattendues du service |
-| Les développeurs ont expliqué pourquoi la mise à jour avait provoqué des pannes inattendues du service. | provoqué | verb | Qu'est-ce qui a provoqué des pannes inattendues ? | la mise à jour |
-| Les développeurs ont expliqué pourquoi la mise à jour avait provoqué des pannes inattendues du service. | provoqué | verb | Qu'est-ce que la mise à jour a provoqué ? | des pannes inattendues du service |
+| Les experts ont souligné que le nouvel algorithme accélère considérablement le traitement des requêtes complexes. | souligné | verb | qui a souligné quelque chose? | Les experts |
+| Les experts ont souligné que le nouvel algorithme accélère considérablement le traitement des requêtes complexes. | accélère | verb | qu'est-ce qui accélère quelque chose? | le nouvel algorithme |
+| Les experts ont souligné que le nouvel algorithme accélère considérablement le traitement des requêtes complexes. | accélère | verb | qu'est-ce que quelque chose accélère? | le traitement des requêtes complexes |
 
 The built-in language presets are:
 
