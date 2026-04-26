@@ -1,14 +1,10 @@
 # XQASem
 
-XQASem is a small Python package for extracting predicate-centered question-answer structures from text. It currently includes presets for French, Russian, and Hebrew models hosted on Hugging Face.
-
-The repository contains code only. Model weights should stay on Hugging Face rather than in Git.
+XQASem is a small Python package for extracting predicate-centered question-answer structures from text. It currently includes presets for French, Russian, and Hebrew models hosted on HuggingFace.
 
 This package accompanies the paper [Effective QA-Driven Annotation of Predicate-Argument Relations Across Languages](https://aclanthology.org/2026.eacl-long.112/).
 
 ## Installation
-
-After the package is published to PyPI:
 
 ```bash
 pip install xqasem
@@ -96,47 +92,6 @@ python scripts/run_parser.py --lang fr --output outputs/fr.csv
 | Hebrew | [`YonatanDavidov/qasem-he-dictalm2-lora`](https://huggingface.co/YonatanDavidov/qasem-he-dictalm2-lora) | `he` via `spacy-stanza` |
 | Hebrew full model | [`YonatanDavidov/qasem-he-dictalm2-full`](https://huggingface.co/YonatanDavidov/qasem-he-dictalm2-full) | `he` via `spacy-stanza` |
 
-## Smoke Test
-
-To check that the installed package, spaCy pipelines, model loading, and output writing work end to end, run:
-
-```bash
-python scripts/smoke_test_languages.py --langs fr ru he --output-dir outputs/smoke
-```
-
-For a faster sanity check on one language:
-
-```bash
-python scripts/smoke_test_languages.py --langs fr --max-items 2
-```
-
-The smoke test writes one CSV per language and prints the number of rows produced. It is intended for local validation and is not run as part of the lightweight unit tests.
-
-## Development
-
-```bash
-pip install -e ".[dev]"
-pytest
-```
-
-Large model files, checkpoints, generated outputs, and local experiment directories are intentionally ignored by `.gitignore`.
-
-## Publishing to PyPI
-
-The public package name is `xqasem`. After updating the version in
-`pyproject.toml` and `xqasem/__init__.py`, build and publish with:
-
-```bash
-python -m pip install --upgrade build twine
-python -m build
-python -m twine upload dist/*
-```
-
-After the first PyPI release, users can install the package with:
-
-```bash
-pip install xqasem
-```
 
 ## Citation
 
