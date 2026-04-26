@@ -25,7 +25,7 @@ class XQasemArgumentParser:
         language: str,
         batch_size: int = _DEFAULT_BATCH_SIZE,
         max_new_tokens: int = _DEFAULT_MAX_LENGTH,
-        do_sample: bool = False,
+        do_sample: bool = True,
         temperature: float = 0.1,
         top_p: float = 0.9,
         verbose: bool = False,
