@@ -266,19 +266,23 @@ class XQasemArgumentParser:
         import torch
 
         messages = [self.build_messages(sentence) for sentence in highlighted_sentences]
-        input_batch = self.tokenizer.apply_chat_template(
+
+        inputs = self.tokenizer.apply_chat_template(
             messages,
             add_generation_prompt=True,
             return_tensors="pt",
             padding=True,
             truncation=False,
+            return_dict=True,
         ).to(self.model.device)
 
-        attention_mask = input_batch.ne(self.tokenizer.pad_token_id).long()
+        input_ids = inputs["input_ids"]
+        attention_mask = inputs["attention_mask"]
+
         terminators = self._get_terminators()
 
         generation_kwargs = {
-            "input_ids": input_batch,
+            "input_ids": input_ids,
             "attention_mask": attention_mask,
             "max_new_tokens": self.max_new_tokens,
             "do_sample": self.do_sample,
@@ -288,6 +292,7 @@ class XQasemArgumentParser:
             "use_cache": True,
             "return_dict_in_generate": False,
         }
+
         if self.do_sample:
             generation_kwargs["temperature"] = self.temperature
             generation_kwargs["top_p"] = self.top_p
@@ -296,9 +301,14 @@ class XQasemArgumentParser:
             outputs = self.model.generate(**generation_kwargs)
 
         batch_responses = []
+        prompt_len = input_ids.shape[-1]
+
         for output in outputs:
-            response = output[input_batch.shape[-1]:]
-            generated_text = self.tokenizer.decode(response, skip_special_tokens=True).strip()
+            response = output[prompt_len:]
+            generated_text = self.tokenizer.decode(
+                response,
+                skip_special_tokens=True
+            ).strip()
             batch_responses.append(generated_text)
 
         return batch_responses
