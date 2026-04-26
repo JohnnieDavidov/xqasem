@@ -15,15 +15,6 @@ env/
 build/
 dist/
 
-output_dir/
-outputs/
-checkpoints/
-checkpoint-*/
-hf_upload/
-french/
-russian/
-hebrew/
-
 *.bin
 *.pt
 *.pth

@@ -49,13 +49,12 @@ print(df)
 
 Example output:
 
-```text
-                                            sentence     predicate predicate_type                                           question                                             answer
-0  Les développeurs ont expliqué pourquoi la mise...     expliqué           verb              Qui a expliqué quelque chose ?                                 Les développeurs
-1  Les développeurs ont expliqué pourquoi la mise...     expliqué           verb       Qu'est-ce que les développeurs ont expliqué ?  pourquoi la mise à jour avait provoqué des pannes inattendues du service
-2  Les développeurs ont expliqué pourquoi la mise...     provoqué           verb  Qu'est-ce qui a provoqué des pannes inattendues ?                                  la mise à jour
-3  Les développeurs ont expliqué pourquoi la mise...     provoqué           verb             Qu'est-ce que la mise à jour a provoqué ?          des pannes inattendues du service
-```
+| sentence | predicate | predicate_type | question | answer |
+| --- | --- | --- | --- | --- |
+| Les développeurs ont expliqué pourquoi la mise à jour avait provoqué des pannes inattendues du service. | expliqué | verb | Qui a expliqué quelque chose ? | Les développeurs |
+| Les développeurs ont expliqué pourquoi la mise à jour avait provoqué des pannes inattendues du service. | expliqué | verb | Qu'est-ce que les développeurs ont expliqué ? | pourquoi la mise à jour avait provoqué des pannes inattendues du service |
+| Les développeurs ont expliqué pourquoi la mise à jour avait provoqué des pannes inattendues du service. | provoqué | verb | Qu'est-ce qui a provoqué des pannes inattendues ? | la mise à jour |
+| Les développeurs ont expliqué pourquoi la mise à jour avait provoqué des pannes inattendues du service. | provoqué | verb | Qu'est-ce que la mise à jour a provoqué ? | des pannes inattendues du service |
 
 The returned value is a `pandas.DataFrame` with these columns:
 
