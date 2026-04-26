@@ -56,12 +56,6 @@ Example output:
 | Les développeurs ont expliqué pourquoi la mise à jour avait provoqué des pannes inattendues du service. | provoqué | verb | Qu'est-ce qui a provoqué des pannes inattendues ? | la mise à jour |
 | Les développeurs ont expliqué pourquoi la mise à jour avait provoqué des pannes inattendues du service. | provoqué | verb | Qu'est-ce que la mise à jour a provoqué ? | des pannes inattendues du service |
 
-The returned value is a `pandas.DataFrame` with these columns:
-
-```text
-sentence, predicate, predicate_type, question, answer
-```
-
 The built-in language presets are:
 
 ```python
