@@ -1,6 +1,8 @@
+[![PyPI version](https://img.shields.io/pypi/v/xqasem.svg)](https://pypi.org/project/xqasem/)
+
 # XQASem
 
-XQASem is a small Python package for extracting predicate-centered question-answer structures from text. It currently includes presets for French, Russian, and Hebrew models hosted on HuggingFace.
+XQASem is a Python package for extracting predicate-centered question-answer structures from text. It currently includes presets for French, Russian, and Hebrew models hosted on HuggingFace.
 
 This package accompanies the paper [Effective QA-Driven Annotation of Predicate-Argument Relations Across Languages](https://aclanthology.org/2026.eacl-long.112/).
 
@@ -19,6 +21,24 @@ python -m spacy download ru_core_news_sm
 
 Hebrew uses `spacy-stanza`; on first use, Stanza may need to download its Hebrew resources.
 
+## Environment
+
+This project was tested with the following setup:
+
+- Python 3.10.20
+- torch 2.6.0 (CUDA 12.4)
+- transformers 4.57.1
+- spaCy 3.7.5
+
+## Requirements
+
+- Python 3.10+
+- transformers >= 4.50
+- spaCy >= 3.7
+- torch >= 2.0
+
+Note: GPU is recommended for efficient inference.
+
 ### Installation from source
 
 ```bash
@@ -28,6 +48,8 @@ pip install -e .
 ```
 
 ## Basic Usage
+
+### Example
 
 ```python
 from xqasem import XQasemParser
@@ -71,7 +93,7 @@ parser = XQasemParser.from_pretrained(
 
 ## Command Line
 
-After installing the package:
+After installation, you can run:
 
 ```bash
 xqasem-parse --lang fr --output outputs/fr.csv "Les experts ont souligné que le nouvel algorithme accélère le traitement."
