@@ -83,6 +83,17 @@ class XQasemParser:
         """
         if spacy_lang == "he":
             import spacy_stanza
+            import torch
+
+            if not getattr(torch.load, "_xqasem_patched", False):
+                _old_load = torch.load
+
+                def patched_load(*args, **kwargs):
+                    kwargs["weights_only"] = False
+                    return _old_load(*args, **kwargs)
+
+                patched_load._xqasem_patched = True
+                torch.load = patched_load
 
             nlp = spacy_stanza.load_pipeline(spacy_lang)
         else:
